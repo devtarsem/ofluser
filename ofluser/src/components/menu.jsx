@@ -10,7 +10,7 @@ function Menu(){
     return(
         <div className="menu flex flex-1 pad16">
             <div className='centre flex flex-2'>
-                <Link to={'/'} className='link'>
+                <Link to={'/products'} className='link'>
                     <img src={cart} className='icon' alt='cart'/>
                 </Link>
             </div>

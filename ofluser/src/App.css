@@ -8,6 +8,9 @@
 .pad16{
   padding: 1.6rem;
 }
+.pad8{
+  padding: 0.8rem;
+}
 .inp{
   padding: 1rem;
   width: 100%;
@@ -15,10 +18,16 @@
   border-radius: 10rem;
   font-family: 'Montserrat';
 }
+.inp__update{
+  border: 0.2rem solid var(--color-one);
+}
 
-.inp:focus{
-  outline: 0.1rem solid var(--color-two);
-  border: none;
+.inp__update:focus{
+  outline: none !important;
+  border:  0.2rem solid var(--color-one);
+}
+.label{
+  font-size: 1.4rem;
 }
 .flex{
   display: flex;
@@ -30,6 +39,9 @@
 .flex-1{
   align-items: center;
   justify-content: space-between;
+}
+.flex-3{
+  align-items: center;
 }
 .flex-dir{
   flex-direction: column;
@@ -55,6 +67,15 @@
 }
 .grid-3-col{
   grid-template-columns: repeat(3, 1fr);
+}
+.grid-2-col{
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid-align{
+  align-items: start;
+}
+.grid-just{
+  justify-content: baseline;
 }
 /**************Menu************/
 .menu{

@@ -1,0 +1,38 @@
+.topComp{
+    height: 90vh;
+}
+.detailImg{
+    width: 15vh;
+}
+.topimg{
+    height: 40vh;
+    background-color: aqua;
+    background-image: linear-gradient(to bottom, #00000007 , #000000c6 ),url('./../icons//des1.jpeg');
+    background-position: center;
+    background-size: cover;
+    border-radius: 0 0 2rem 2rem;
+}
+.addoptions{
+    height: 10vh;
+}
+.detailsItem{
+    height: 40vh;
+}
+
+.namee__detail{
+    color: var(--color-two);
+    font-size: 4.8rem;
+    text-align: center;
+}
+.namee__detail::first-letter{
+    text-transform: uppercase;
+}
+.addtocart_small,.addlesPanel{
+    width: 40%;
+}
+.detailcontent{
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    font-style: italic;
+}

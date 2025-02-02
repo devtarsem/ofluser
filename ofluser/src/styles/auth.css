@@ -1,0 +1,27 @@
+.auth{
+    background-image: linear-gradient(60deg, var(--color-four) 50%, var(--color-three) 50%);
+
+}
+.authTop{
+    height: 20vh;
+    background-image: linear-gradient(to bottom, #00000007 , #000000c6 ),url('./../icons/des1.jpeg');
+    background-position: center;
+    background-size: cover;
+    border-radius: 0 0 5rem 0rem;
+}
+.authMiddle{
+    height: 80vh;
+}
+.authHead{
+    font-size: 3.2rem;
+    color: var(--color-two);
+}
+.openAccBtn{
+    border: none;
+    padding: 1.2rem;
+    background-color: var(--color-one);
+    font-family: 'Montserrat';
+    color: var(--color-two);
+    border-radius: 1rem;
+    cursor: pointer;
+}

@@ -1,0 +1,175 @@
+.products{
+    position: relative;
+}
+.billpanel{
+    position: absolute;
+    width: 60%;
+    right: 0;
+    top: 10vh;
+    height: 75vh;
+    z-index: 20;
+    background-color: var(--color-one);
+    transition: all 0.5s;
+}
+.billpanelOpen{
+    right: 0%;
+}
+.billpanelClose{
+    right: -100%;
+}
+.productsMid{
+    background-color: var(--color-four);
+}
+.topsearch{
+    height: 10vh;
+    width: 100%;
+}
+.productsMid{
+    height: 75vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.Checkout{
+    height: 15vh;
+    position: relative;
+}
+.popUpBillBtn{
+    position: absolute;
+    bottom: 100%;
+    left: 5%;
+    border: none;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    font-family: 'Montserrat';
+    background-color: var(--color-one);
+    border-radius: 1rem 1rem 0 0;
+    color: var(--color-two);
+    z-index: 30;
+}
+.search{
+    border: 0.1rem solid var(--color-one);
+}
+.checks{
+    background-color: var(--color-one);
+    width: 100%;
+    height: 100%;
+    border-radius: 10rem;
+}
+.procont{
+    border-radius: 1rem;
+    box-shadow: 0 0 0.15rem var(--color-one);
+    background-color: var(--color-two);
+}
+.prodicon{
+    width: 9.6rem;
+}
+.name{
+    text-align: center;
+}
+.name__{
+    font-size: 1.2rem;
+}
+.iconHome{
+    width: 4.4rem;
+}
+.checkotport{
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-two);
+    border-radius: 10rem;
+}
+.checkBtn{
+    width: 50% !important;
+    height: 100%;
+    box-shadow: 0 0 1rem #fff; 
+    font-size: 2rem;
+    text-decoration: none;
+}
+
+.authsmallbtn{
+    font-size: 1.6rem;
+    text-align: center;
+}
+.bill{
+    font-size:2.2rem;
+    margin-left: 1.6rem;
+}
+.addless{
+    width: 100%;
+}
+.addedunits{
+    font-size: 1.2rem;
+}
+.addBtn{
+    font-size: 1.6rem;
+    border: none;
+    padding: 0 1rem;
+    background-color: var(--color-one);
+    border-radius: 1rem;
+    color: var(--color-two);
+    cursor: pointer;
+}
+.Grossbill,.grossbillval{
+    font-size: 1.4rem;
+    color: var(--color-two);
+}
+.grossbillval{
+    font-weight: 700;
+}
+.head3Big{
+    font-size: 1.6rem;
+}
+.checkbtn,.checkbtnOutFill,.applybtn{
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: 'Montserrat';
+    border-radius: 1rem;
+    background-color: var(--color-two);
+}
+.checkbtnOutFill{
+    background: none;
+    box-shadow: inset 0 0 0 0.1rem  var(--color-two);
+    color: var(--color-two);
+}
+.coupantbox{
+    position: relative;
+}
+.applybtn{
+    position: absolute;
+    background-color: var(--color-one);
+    color: var(--color-two);
+    right: 4%;
+}
+
+.products{
+    position: relative;
+    overflow: hidden;
+}
+.orderfinish{
+    position: absolute;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-one);
+    
+}
+
+.congo{
+    color: var(--color-two);
+    font-size: 2.4rem;
+}
+.ordericon{
+    width: 50%;
+}
+.trackBtn{
+    padding: 1.6rem 3.2rem;
+    background-color: var(--color-two);
+    font-size: 1.6rem;
+    color: var(--color-one);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 10rem;
+}
