@@ -14,7 +14,7 @@ function Home(){
                 </div>
                 <div className='topcontent'>
                     <h3 className='head3'>Hello sir!</h3>
-                    <h1 className='head1'>Discover</h1>
+                    <h1 className='head1'>Discover now</h1>
                     <h1 className='head1'>Vegetables and fruits</h1>
                     <div className='searchPanel'>
                         <Search/>
