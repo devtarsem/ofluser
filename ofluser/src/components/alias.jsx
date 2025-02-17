@@ -6,7 +6,6 @@ import lichi from './../icon/lichi.jpg'
 import apple from './../icon/kapple.jpg'
 import baigan from './../icon/bharta.jpeg'
 import noimg from './../icon/noimg.png'
-import { useSelector, useDispatch } from 'react-redux';
 
 import adrak from './../icon/adrak.jpg'
 import amla from './../icon/amla.jpg'
@@ -141,11 +140,12 @@ import mashroom from './../icon/mashroom.jpeg'
 import patato from './../icon/patato.jpeg'
 import soyachaap from './../icon/chaap.jpeg'
 import tikki from './../icon/tikki.jpeg'
-
+import { cartPrepOnStartWhenCartNotAvailable, makingOrderFinishSetToDefaultCreator,OrderItemWITHCODCreator,BillCalculationOnPageLoad,LessMoreQuantityToItemsCreator,AddMoreQuantityToItemsCreator,AddToCartCreator,alreadyHaveCart} from '../slices/productslice';
+import { aliasAddItems } from '../slices/productslice'
 import { useSelector, useDispatch } from 'react-redux';
-import { aliasAddItems, AddMoreQuantityToItemsCreator , LessMoreQuantityToItemsCreator} from '../slices/productslice'
 import Loader from './loader'
-
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 function Alias(){
 
     const aliasHome = useSelector(store=> store.product.aliasHome)
