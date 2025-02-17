@@ -18,7 +18,7 @@ function TrackAll(){
                 <h2 className='headtrack'>Track your orders</h2>
             </div>
             <div className='alltrackscontainer pad16 flex flex-dir gap16'>
-                {productStore.product.tracks.map(el=>
+                {productStore.product.tracks.length != 0 ? productStore.product.tracks.map(el=>
                     <div className='tracksItems pad16 flex flex-dir gap8' key={el._id}>
                         <p className='idOrder'>Order id : <span>{el._id}</span></p>
                         <p className='idOrder'>Order date : <span>{el.date}</span></p>
@@ -27,7 +27,7 @@ function TrackAll(){
                         <p className='delstatus'>Delivery status : <span>{el.delivered}</span></p>
                         <Link to={`/track/${el._id}`} className='trackLink'>Track your order</Link>
                     </div>
-                )}
+                ) : <p className='noorderyet'>No order placed yet</p>}
             </div>
         </div>
     )
