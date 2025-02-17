@@ -430,10 +430,14 @@ export function OpenAccountCreator(data){
             }
         }).then(el=>{
             localStorage.setItem('user', JSON.stringify(el.data))
-            dispatch({type : 'signup', payload : true})
+            dispatch({type : 'signup', payload : false})
             // window.location='/products'
         })
     }
+}
+
+export function openAcczformCreartor(){
+    return {type : 'signup', payload : true}
 }
 
 export function makingOrderFinishSetToDefaultCreator(){

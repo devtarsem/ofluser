@@ -3,7 +3,7 @@ import Search from './search';
 import axios from 'axios'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { cartPrepOnStartWhenCartNotAvailable, makingOrderFinishSetToDefaultCreator,OrderItemWITHCODCreator,BillCalculationOnPageLoad,LessMoreQuantityToItemsCreator,AddMoreQuantityToItemsCreator,AddToCartCreator,alreadyHaveCart} from '../slices/productslice';
+import { openAcczformCreartor, cartPrepOnStartWhenCartNotAvailable, makingOrderFinishSetToDefaultCreator,OrderItemWITHCODCreator,BillCalculationOnPageLoad,LessMoreQuantityToItemsCreator,AddMoreQuantityToItemsCreator,AddToCartCreator,alreadyHaveCart} from '../slices/productslice';
 
 import home from './../icon/homeW.png'
 import {Link} from 'react-router-dom'
@@ -156,7 +156,7 @@ import mashroom from './../icon/mashroom.jpeg'
 import patato from './../icon/patato.jpeg'
 import soyachaap from './../icon/chaap.jpeg'
 import tikki from './../icon/tikki.jpeg'
-
+import SignUp from './signup';
 import Loader from './loader';
 
 function Products(){
@@ -242,9 +242,15 @@ function Products(){
     }
 
 
+    function accOpen(){
+        dispatch(openAcczformCreartor())
+    }
+
+
 
     return(
         <div className="products">
+            {productStore.account && <SignUp/> }
             {productStore.order_finish ?
                 <div className='orderfinish flex flex-2'>
                     <div className='flex flex-2 flex-dir gap8'>
@@ -475,7 +481,7 @@ function Products(){
                         {localStorage.getItem('user') ?
                             <button onClick={CheckOut} className='checkBtn addtocart'>Checkout</button>
                          : 
-                            <Link to={'/auth'} className='checkBtn addtocart authsmallbtn flex flex-2'>Signup/Login</Link>
+                         <button onClick={accOpen} className='checkBtn addtocart'>Signup/Login</button>
                         }
                     </div>
                 </div>

@@ -25,9 +25,6 @@ function SignUp(){
         dispatch(OpenAccountCreator(acc))
     }
 
-    useEffect(el=>{
-        navigate('/products')
-    }, [store.account])
 
     return(
         <div className="signup pad16 flex flex-dir gap16">
