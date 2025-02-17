@@ -6,6 +6,7 @@ import lichi from './../icon/lichi.jpg'
 import apple from './../icon/kapple.jpg'
 import baigan from './../icon/bharta.jpeg'
 import noimg from './../icon/noimg.png'
+import { useSelector, useDispatch } from 'react-redux';
 
 import adrak from './../icon/adrak.jpg'
 import amla from './../icon/amla.jpg'
@@ -143,11 +144,12 @@ import tikki from './../icon/tikki.jpeg'
 
 import { useSelector, useDispatch } from 'react-redux';
 import { aliasAddItems, AddMoreQuantityToItemsCreator , LessMoreQuantityToItemsCreator} from '../slices/productslice'
+import Loader from './loader'
 
 function Alias(){
 
     const aliasHome = useSelector(store=> store.product.aliasHome)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     function AddAlias(el){
         el.preventDefault()
         console.log()
@@ -162,9 +164,37 @@ function Alias(){
         const name = el.target.parentNode.parentNode.children[1].textContent
         dispatch(LessMoreQuantityToItemsCreator(name))
     }
+    const [load, setLoad] = useState(false);
+    useEffect(el=>{
+        if(localStorage.getItem('prepcart')){
+            setLoad(load=> true)
+            dispatch(alreadyHaveCart(JSON.parse(localStorage.getItem('prepcart'))))
+            setLoad(load=> false)
+        
+        }else{
+            setLoad(load=> true)
+            axios({
+                method : 'POST',
+                url : 'https://wheelbackend.onrender.com/api/v1/product/all-products',
+                data : {
+                    token : 'logout'
+                }
+            }).then(el=>{
+                console.log()
+                dispatch(cartPrepOnStartWhenCartNotAvailable(el.data.data.items))
+                setLoad(load=> false)
+            
+            })
+        }
+    }, [])
     return(
         <div className="alias flex flex-dir gap32">
             <h4 className="head4">We have best products for you</h4>
+            {load &&
+                    <div className='loadp'>
+                        <Loader/>
+                    </div>
+                }
             <div className="grid grid-3-col gap16">
                 {aliasHome.map(el=>
                     <div key={el._id} className='cover flex flex-2 flex-dir gap8'>

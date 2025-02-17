@@ -177,7 +177,7 @@ function Products(){
             setLoad(load=> true)
             axios({
                 method : 'POST',
-                url : 'http://127.0.0.1:4000/api/v1/product/all-products',
+                url : 'https://wheelbackend.onrender.com/api/v1/product/all-products',
                 data : {
                     token : 'logout'
                 }
