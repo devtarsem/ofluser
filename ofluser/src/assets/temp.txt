@@ -1,0 +1,23 @@
+ // const geocoder = new MapboxGeocoder({
+    //     accessToken: MAPBOX_TOKEN, // Set your Mapbox access token
+    //     mapboxgl: mapboxgl, // Pass the Mapbox GL instance
+    //     marker: true, // Do not display a marker by default on search results
+    //   });
+    //   map.addControl(geocoder, 'top-left');
+
+
+const marker = new mapboxgl.Marker({ draggable: true })
+      .setLngLat([75.5762, 31.3255]) // Initial position (Jalandhar coordinates)
+      .addTo(map);
+
+    // Listen for the drag event
+    marker.on('dragend', () => {
+      const lngLat = marker.getLngLat(); // Get the new coordinates after dragging
+      console.log(`New location: ${lngLat.lat}, ${lngLat.lng}`);
+
+      // Store the user's location
+      setUserLocation({ lat: lngLat.lat, lng: lngLat.lng });
+      
+    });
+   
+    

@@ -1,0 +1,19 @@
+.loc{
+    width: 90%;
+    height: 90vh;
+    z-index: 5000;
+    background-color: var(--color-two);
+    bottom: 0;
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%);
+    border-radius: 5rem 5rem 0 0; 
+    box-shadow: 0 0 0.5rem #000;
+    overflow: hidden;
+}
+
+.locmap{
+    height: 60vh;
+    width: 100%;
+    background-color: aqua;
+}

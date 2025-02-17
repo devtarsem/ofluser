@@ -1,4 +1,3 @@
-import carrot from './../icons/carot.jpg'
 
 
 function ComboAlias(){
@@ -11,7 +10,6 @@ function ComboAlias(){
                     <div className='comboOff grid grid-3-col gap16'>
                         {[1,2,3,4,516,6].map(el=>
                             <div className='flex flex-dir flex-2 gap8' key={el} >
-                                <img src={carrot} className='iconeg' alt='vegetale'/>
                                 <p className='units'>1 Kg</p>
                             </div>
                         )}

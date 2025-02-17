@@ -1,7 +1,8 @@
 import axios from "axios"
 import io from 'socket.io-client'
+import Swal from 'sweetalert2'
 
-const socket = io.connect("http://127.0.0.1:4000")
+const socket = io.connect("https://wheelbackend.onrender.com")
 const initialProds = {
     addedprods : [],
     cartCount : 0,
@@ -13,7 +14,36 @@ const initialProds = {
     cartLength : 0,
     order_finish : false,
     tracks : [],
-    trackedItem : {}
+    aliasHome : [],
+    trackedItem : {
+        "item_list": [
+              
+            ],
+            "date": "5/2/2025",
+            "time": "1:09:14 am",
+            "subtotal": 65,
+            "tax": 0,
+            "platform": 0,
+            "total": 85,
+            "razorpay_payment_id": "",
+            "razorpay_order_id": "",
+            "razorpay_signature": "",
+            "payment_mode": "cod",
+            "payment_status": "pending",
+            "creds": [
+              "tarsem singh",
+              "coming soon...",
+              "7837642836"
+            ],
+            "client_id": "67a26cdb458c10259e796fc5",
+            "packed": "packed",
+            "delivered": "not delivered",
+            "outForDelivery": "not out",
+            "refund_status": "no refund",
+            "_id": {
+              "$oid": "67a26ce2458c10259e796fc8"
+            }
+}
 }
 
 
@@ -47,6 +77,9 @@ export const productReducer = (state = initialProds, action)=>{
             return {...state, tracks : action.payload}
         case 'TrackedItem' :
             return {...state, trackedItem : action.payload}
+        case 'aliasHome' :
+            return {...state, aliasHome : action.payload}
+
         default :
             return state
     }
@@ -96,7 +129,7 @@ export function AddToCartCreator(newElement,data){
 export function BillCalculationOnPageLoad(){
     return function(dispatch, getstate){
         /*****billing calculation****/
-        const prepCart = JSON.parse(localStorage.getItem('prepcart'))
+        const prepCart = localStorage.getItem('prepcart') ? JSON.parse(localStorage.getItem('prepcart')) : []
         let cartArr = []
         prepCart.forEach(el=>{
             if(el.addedValue!=0){
@@ -189,15 +222,23 @@ export function renderCartFromLoadCreator(){
 export function AddMoreQuantityToItemsCreator(itemName){
     return function(dispatch, getstate){
         let cart = JSON.parse(localStorage.getItem('prepcart'))
+        let catagory = ''
         cart.forEach(el=>{
             if(el.name === itemName){
                 // el[2] = Number(el[2]) + Number(el[3])
                 el.addedValue = Number(el.addedValue)+ Number(el.min)
+                catagory = el.variety;
             }
         })
         localStorage.setItem('prepcart', JSON.stringify(cart))
         dispatch({type : 'addtocartADDMORE', payload : cart})
-
+        const veglist = [];
+        cart.forEach(el=>{
+            if(el.variety === catagory){
+                veglist.push(el);
+            }
+        })
+        dispatch({type : 'aliasHome', payload : veglist})
         /*****billing calculation****/
         const prepCart = JSON.parse(localStorage.getItem('prepcart'))
         let cartArr = []
@@ -226,6 +267,7 @@ export function AddMoreQuantityToItemsCreator(itemName){
 export function LessMoreQuantityToItemsCreator(itemName){
     return function(dispatch, getstate){
         let cart = JSON.parse(localStorage.getItem('prepcart'))
+        let catagory = ''
         cart.forEach(el=>{
             if(el.name === itemName){
                 // el[2] = Number(el[2]) + Number(el[3])
@@ -233,11 +275,18 @@ export function LessMoreQuantityToItemsCreator(itemName){
                     return
                 }
                 el.addedValue = Number(el.addedValue)- Number(el.min)
+                catagory = el.variety;
             }
         })
         localStorage.setItem('prepcart', JSON.stringify(cart))
         dispatch({type : 'addtocartLESSMORE', payload : cart})
-
+        const veglist = [];
+        cart.forEach(el=>{
+            if(el.variety === catagory){
+                veglist.push(el);
+            }
+        })
+        dispatch({type : 'aliasHome', payload : veglist})
 
         /*****billing calculation****/
         const prepCart = JSON.parse(localStorage.getItem('prepcart'))
@@ -299,13 +348,15 @@ export function OrderItemWITHCODCreator(data){
             }
         })
         data.itemsList = cart
-        axios({
-            method : 'POST',
-            url : 'http://127.0.0.1:4000/api/v1/user/cod-payment',
+
+        socket.emit('placed', {
             data : {
-                items : data
+            items : data
             }
-        }).then(el=>{
+        })
+        socket.off("orderPlacedResponse");
+        socket.on("orderPlacedResponse", (data)=>{
+            console.log(data)
             let listfromLocal = JSON.parse(localStorage.getItem('prepcart'))
             listfromLocal.forEach(el=>{
                 el.addedValue = 0
@@ -322,15 +373,45 @@ export function OrderItemWITHCODCreator(data){
 
             localStorage.setItem('orderPlaced', true)
 
-            localStorage.setItem('AllOrders', JSON.stringify(el.data.data.orders))            
+            localStorage.setItem('AllOrders', JSON.stringify(data))            
             dispatch({type : 'OrderItemWithCOD', payload : true})
             // dispatch({type : 'orderPlacingFinish'})
-            dispatch({type : 'cartItems', payload : {arr:[], grossPrice:0,cartLength : 0, delivery: data.items.delivery_charges, totalBill: data.items.delivery_charges}})
+            dispatch({type : 'cartItems', payload : {arr:[], grossPrice:0,cartLength : 0, delivery: data.delivery_charges, totalBill: data.delivery_charges}})
         
-            // socket connection here
-
-            
         })
+        
+
+        // axios({
+        //     method : 'POST',
+        //     url : 'https://wheelbackend.onrender.com/api/v1/user/cod-payment',
+        //     data : {
+        //         items : data
+        //     }
+        // }).then(el=>{
+        //     let listfromLocal = JSON.parse(localStorage.getItem('prepcart'))
+        //     listfromLocal.forEach(el=>{
+        //         el.addedValue = 0
+        //     })
+        //     localStorage.setItem('prepcart', JSON.stringify(listfromLocal))
+            
+        //     // if(localStorage.getItem('orderPlaced')){
+        //     //     const placed_orders = JSON.parse(localStorage.getItem('orderPlaced'))
+        //     //     placed_orders.push(el.data.data.orders)
+        //     //     localStorage.setItem('orderPlaced', JSON.stringify(placed_orders))
+        //     // }else{
+        //     //     localStorage.setItem('orderPlaced', JSON.stringify([el.data.data.orderPlaced]))
+        //     // }
+
+        //     localStorage.setItem('orderPlaced', true)
+
+        //     localStorage.setItem('AllOrders', JSON.stringify(el.data.data.orders))            
+        //     dispatch({type : 'OrderItemWithCOD', payload : true})
+        //     // dispatch({type : 'orderPlacingFinish'})
+        //     dispatch({type : 'cartItems', payload : {arr:[], grossPrice:0,cartLength : 0, delivery: data.items.delivery_charges, totalBill: data.items.delivery_charges}})
+        
+        //     // socket connection here
+            
+        // })
 
     }
 }
@@ -341,7 +422,7 @@ export function OpenAccountCreator(data){
     return async function(dispatch, getstate){
         axios({
             method : 'POST',
-            url : 'http://127.0.0.1:4000/api/v1/user/open-acc',
+            url : 'https://wheelbackend.onrender.com/api/v1/user/open-acc',
             data : {
                 user : data
             }
@@ -353,6 +434,9 @@ export function OpenAccountCreator(data){
     }
 }
 
+export function makingOrderFinishSetToDefaultCreator(){
+    return {type : 'OrderItemWithCOD', payload : false}
+}
 
 export function TracksAllCreator(){
     return async (dispatch, getItem)=>{
@@ -361,7 +445,7 @@ export function TracksAllCreator(){
             console.log('logged')
             axios({
                 method : 'POST',
-                url : 'http://127.0.0.1:4000/api/v1/user/get-latest-placed-order',
+                url : 'https://wheelbackend.onrender.com/api/v1/user/get-latest-placed-order',
                 data : {
                     token : JSON.parse(localStorage.getItem('user')).data.token
                 }
@@ -387,5 +471,118 @@ export function TrackedItemCreator(id){
         })
         console.log(filterElement)
         dispatch({type : 'TrackedItem', payload : filterElement[0]})
+    }
+}
+
+
+export function flashCartCreator(){
+    return async function(dispatch, getstate){
+        const cart = JSON.parse(localStorage.getItem('prepcart'))
+        const flashBasket = [
+            {
+                name : 'nasik onion',
+                units : '1'
+            }
+            ,
+            {
+                name : 'allo dum',
+                units : '1'
+            }
+            ,
+            {
+                name : 'desi tomato',
+                units : '1'
+            }
+        ]
+        cart.forEach(item=>{
+            flashBasket.forEach(flash=>{
+                if(flash.name == item.name){
+                    item.addedValue = flash.units;
+                }
+            })
+        })
+
+        localStorage.setItem('prepcart', JSON.stringify(cart))
+
+        dispatch({type : 'addtocart', payload : cart})
+    
+    
+        /*****billing calculation****/
+        const prepCart = JSON.parse(localStorage.getItem('prepcart'))
+        let cartArr = []
+        prepCart.forEach(el=>{
+            if(el.addedValue!=0){
+                cartArr.push(el)
+            }
+        })
+        console.log(cartArr)
+        const cartLength = cartArr.length
+
+        let grossPrice = 0
+        cartArr.forEach(el=>{
+            grossPrice = grossPrice + el.addedValue*el.price
+        })
+
+        let delivery = 20
+
+        let totalBill = delivery + grossPrice
+        dispatch({type : 'bills', payload : {grossPrice:grossPrice,cartLength : cartLength, delivery: delivery, totalBill: totalBill}})
+        Swal.fire({
+            title: 'Success',
+            text: 'Flash basket added',
+            icon: 'success',
+            confirmButtonText: 'close'
+          })
+    }
+}
+
+
+export function HomeVegetableAlias(catagory){
+    return async function(dispatch, getState){
+        const cart = JSON.parse(localStorage.getItem('prepcart'))
+        const veglist = [];
+        cart.forEach(el=>{
+            if(el.variety === catagory){
+                veglist.push(el);
+            }
+        })
+        dispatch({type : 'aliasHome', payload : veglist})
+    }
+}
+
+export function aliasAddItems(item){
+    return async function(dispatch, getState){
+        const cart = JSON.parse(localStorage.getItem('prepcart'));
+        let catagory = ''
+        cart.forEach(el=>{
+            if(el.name === item){
+                el.addedValue = el.min;
+                catagory = el.variety;
+            }
+        })
+        const veglist = [];
+        cart.forEach(el=>{
+            if(el.variety === catagory){
+                veglist.push(el);
+            }
+        })
+        dispatch({type : 'aliasHome', payload : veglist})
+        localStorage.setItem('prepcart', JSON.stringify(cart))
+
+        dispatch({type : 'addtocart', payload : cart})
+    }
+}
+
+export function searchproductCreator(name){
+    return async function(dispatch, getstate){
+        const cart = JSON.parse(localStorage.getItem('prepcart'))
+        const newcart = cart.filter(el=>{
+            if(el.name.includes(name)){
+                return el;
+            }
+        })
+        console.log(newcart)
+        dispatch({type : 'addtocart', payload : newcart})
+
     }
 }

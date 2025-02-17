@@ -64,13 +64,13 @@
 .offerdesw{
     height: 20vh;
     width: 50vh;
-    background-image: linear-gradient(to right bottom, #159957dd, #15995718),url('./../icons/des1.jpeg');
+    background-image: linear-gradient(to right bottom, #159957dd, #15995718),url('./../icon/des1.jpeg');
     background-position: center;
     background-size: cover;
     border-radius: 1rem;
 }
 .fruitback{
-    background-image: linear-gradient(to right bottom, #ffea00bd, #ffea000f),url('./../icons/fruits.jpg');
+    background-image: linear-gradient(to right bottom, #ffea00bd, #ffea000f),url('./../icon/fruits.jpg');
 
 }
 .offerdes{
@@ -95,6 +95,22 @@
     padding-top: 0 !important;
     margin-top: -1.6rem;
 }
+.namealias{
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+.aliasbtn{
+    background: none;
+    border: none;
+}
+.backfill{
+    background-color: var(--color-one);
+    outline: 0.3rem dashed var(--color-one);
+    border-radius: 1rem;
+    color: var(--color-two);
+    transform: scale(1.1);
+    transition: all 0.2s;
+}
 .head4{
     color: #000;
     font-size: 1.4rem;
@@ -105,7 +121,9 @@
     width: 6.4rem;
     height: 100%;
 }
-
+.icon__big{
+    width: 6.4rem;
+}
 .addtocart{
     border: none;
     width: 100%;

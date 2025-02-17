@@ -68,6 +68,25 @@
 .deliveryname span{
     font-weight: 700;
 }
+.map{
+    position: relative;
+}
+.delinonehour{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: var(--color-one);
+    border-radius: 0 0 2rem 0;
+}
+.hourdel{
+    font-size: 1.6rem;
+    color: var(--color-two);
+    
+}
+.hourdel span{
+    font-weight: 700;
+}
 
 /*****************all tracks shown page***************/
 .alltrackscontainer{

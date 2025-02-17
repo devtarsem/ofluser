@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import Menu from "./menu";
 import './../styles/detail.css'
-import orange from './../icons/orange.jpg'
+import orange from './../icon/orange.jpg'
 import { useEffect, useState } from "react";
 import { AddToCartCreator } from "../slices/productslice";
 import { useSelector, useDispatch } from 'react-redux';

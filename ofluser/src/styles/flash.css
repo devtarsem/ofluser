@@ -1,0 +1,26 @@
+.flash{
+    background-color: var(--color-two);
+    border-radius: 10rem;
+    /* outline: 1rem dashed #ffffff36; */
+    animation: borders 0.5s   infinite  ;
+    transition: all 0.1s;
+}
+.flashbtn{
+    padding: 0.8rem 1.6rem;
+    border-radius: 10rem;
+    color: var(--color-two);
+    border: none;
+    background-color: var(--color-one);
+    cursor: pointer;
+}
+@keyframes borders {
+    0%{
+        outline: 1rem dashed #ffffff36;
+    }
+    50%{
+        outline: 1rem solid #ffffff36;
+    }
+    100%{
+        outline: 1rem dashed #ffffff36;
+    }
+}

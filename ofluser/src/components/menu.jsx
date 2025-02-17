@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom'
-import home from './../icons/home.png'
-import combo from './../icons/combo.png'
-import cart from './../icons/carrt.png'
-import order from './../icons/order.png'
-import user from './../icons/user.png'
+import home from './../icon/home1.png'
+import combo from './../icon/combo.png'
+import cart from './../icon/carrt.png'
+import order from './../icon/order.png'
+import user from './../icon/user1.png'
 
 
 function Menu(){
@@ -20,7 +20,7 @@ function Menu(){
             <Link to={'/'} className='link linkoo'>
                 <img src={combo} className='icon__ combo' alt='cart'/>
             </Link>
-            <Link to={'/'} className='link linkoo'>
+            <Link to={'/track-all'} className='link linkoo'>
                 <img src={order} className='icon__' alt='cart'/>
             </Link>
             <Link to={'/'} className='link linkoo'>
