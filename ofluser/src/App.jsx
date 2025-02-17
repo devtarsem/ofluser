@@ -6,6 +6,7 @@ import Detail from './components/details'
 import Auth from './components/auth'
 import Track from './components/track'
 import TrackAll from './components/allTracks'
+import Coming from './components/coming'
 
 const routes = createBrowserRouter([
   {
@@ -36,6 +37,11 @@ const routes = createBrowserRouter([
   {
     path : '/track-all',
     element : <TrackAll/>
+  }
+  ,
+  {
+    path : '/coming',
+    element : <Coming/>
   }
 ])
 

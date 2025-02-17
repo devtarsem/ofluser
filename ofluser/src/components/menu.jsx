@@ -17,13 +17,13 @@ function Menu(){
             <Link to={'/'} className='link linkoo'>
                 <img src={home} className='icon__' alt='cart'/>
             </Link>
-            <Link to={'/'} className='link linkoo'>
+            <Link to={'/coming'} className='link linkoo'>
                 <img src={combo} className='icon__ combo' alt='cart'/>
             </Link>
             <Link to={'/track-all'} className='link linkoo'>
                 <img src={order} className='icon__' alt='cart'/>
             </Link>
-            <Link to={'/'} className='link linkoo'>
+            <Link to={'/coming'} className='link linkoo'>
                 <img src={user} className='icon__' alt='cart'/>
             </Link>
         </div>
