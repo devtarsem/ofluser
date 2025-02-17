@@ -13,6 +13,7 @@ const initialProds = {
     total_bill : 0,
     cartLength : 0,
     order_finish : false,
+    account : false,
     tracks : [],
     aliasHome : [],
     trackedItem : {
@@ -79,7 +80,8 @@ export const productReducer = (state = initialProds, action)=>{
             return {...state, trackedItem : action.payload}
         case 'aliasHome' :
             return {...state, aliasHome : action.payload}
-
+        case 'signup' :
+            return {...state, account : action.payload}
         default :
             return state
     }
@@ -428,8 +430,8 @@ export function OpenAccountCreator(data){
             }
         }).then(el=>{
             localStorage.setItem('user', JSON.stringify(el.data))
-            dispatch({type : 'signup'})
-            window.location='/products'
+            dispatch({type : 'signup', payload : true})
+            // window.location='/products'
         })
     }
 }

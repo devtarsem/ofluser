@@ -1,6 +1,8 @@
 import { createRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OpenAccountCreator } from "../slices/productslice";
+import { useNavigate } from "react-router";
+
 function SignUp(){
     const dispatch = useDispatch()
     const username = createRef()
@@ -10,7 +12,8 @@ function SignUp(){
     const society = createRef()
     const password = createRef()
     const confirm_password = createRef()
-
+    const navigate = useNavigate()
+    const store = useSelector(store=> store.product)
 
     function OpenAccount(el){
         const acc = {
@@ -21,6 +24,10 @@ function SignUp(){
         }
         dispatch(OpenAccountCreator(acc))
     }
+
+    useEffect(el=>{
+        navigate('/products')
+    }, [store.account])
 
     return(
         <div className="signup pad16 flex flex-dir gap16">
