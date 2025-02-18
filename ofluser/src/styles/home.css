@@ -151,3 +151,15 @@
     font-size: 1.6rem;
     text-align: center;
 }
+
+.hedsign{
+    background-image: url('./../icon/veg.jpg');
+    background-position: center;
+    background-size: cover;
+    border-radius: 1rem;
+}
+.head2sign{
+    text-align: center;
+    font-size: 3.2rem !important;
+    color: var(--color-two) !important;
+}

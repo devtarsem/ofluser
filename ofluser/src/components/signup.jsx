@@ -2,6 +2,7 @@ import { createRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { OpenAccountCreator } from "../slices/productslice";
 import { useNavigate } from "react-router";
+import Loader from "./loader";
 
 function SignUp(){
     const dispatch = useDispatch()
@@ -14,8 +15,10 @@ function SignUp(){
     const confirm_password = createRef()
     const navigate = useNavigate()
     const store = useSelector(store=> store.product)
+    const [load, setLoad] = useState(false);
 
     function OpenAccount(el){
+        setLoad(load=> true)
         const acc = {
             name : username.current.value,
             phone : phone.current.value,
@@ -27,7 +30,12 @@ function SignUp(){
 
 
     return(
+
+                
         <div className="signup pad16 flex flex-dir gap16">
+            <div className="hedsign flex flex-2 pad16">
+                <h2 className="head2sign">Open your account</h2>
+            </div>
             <div className="flex flex-dir gap8">
                 <label className="label">Username</label>
                 <input ref={username} className="inp inp__update" placeholder="name" type="text"/>
@@ -62,7 +70,11 @@ function SignUp(){
                     <input disabled className="inp inp__update" value='Jalandhar' placeholder="jyoti chock" type="text"/>
                 </div>
             </div>
+            {load ? 
+                <Loader/>
+            :
             <button onClick={OpenAccount} className="openAccBtn">Open your account</button>
+             }
         </div>
     )
 }

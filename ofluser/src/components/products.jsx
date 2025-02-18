@@ -224,6 +224,7 @@ function Products(){
     }
 
     function CheckOut(){
+        setLoad(load=> true)
         const data = {
             itemsList : productStore.addedprods,
             token : JSON.parse(localStorage.getItem('user')).data.token,
@@ -250,7 +251,10 @@ function Products(){
 
     return(
         <div className="products">
-            {productStore.account && <SignUp/> }
+            <div className='signn'>
+                {productStore.account && <SignUp/> }
+
+            </div>
             {productStore.order_finish ?
                 <div className='orderfinish flex flex-2'>
                     <div className='flex flex-2 flex-dir gap8'>
