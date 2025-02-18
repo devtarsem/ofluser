@@ -8,8 +8,8 @@ import Alias from './alias'
 import ComboAlias from './comboAlias'
 import SetLocation from './setLocation'
 import io from "socket.io-client";
-// const socket = io.connect("https://wheelbackend.onrender.com");
-const socket = io("https://wheelbackend.onrender.com", { transports: ["websocket"] })
+// const socket = io.connect("https://wheelbackend.onrender.com/");
+const socket = io("https://wheelbackend.onrender.com/", { transports: ["websocket"] })
 import { useEffect, useState } from 'react'
 import FlashCart from './flashcart'
 import { HomeVegetableAlias, aliasAddItems } from '../slices/productslice'

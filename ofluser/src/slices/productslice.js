@@ -2,7 +2,7 @@ import axios from "axios"
 import io from 'socket.io-client'
 import Swal from 'sweetalert2'
 
-const socket = io.connect("https://wheelbackend.onrender.com")
+const socket = io.connect("https://wheelbackend.onrender.com/")
 const initialProds = {
     addedprods : [],
     cartCount : 0,

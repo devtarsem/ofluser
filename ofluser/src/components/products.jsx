@@ -11,7 +11,7 @@ import { useState } from 'react';
 import tick from './../icon/tick.png'
 import io from 'socket.io-client'
 
-const socket = io.connect("https://wheelbackend.onrender.com")
+const socket = io.connect("https://wheelbackend.onrender.com/")
 import cross from './../icon/notfound.png'
 
 import lassan from './../icon/lassan.jpg'
