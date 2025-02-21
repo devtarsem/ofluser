@@ -342,54 +342,23 @@ export function SearchedItemsListProducts(data){
 export function OrderItemWITHCODCreator(data){
     return function(dispatch, getItem){
         // dispatch({type : 'OrderItemWithCOD', payload : true})
-        let listfromLocal = data.itemsList
-        let cart = []
-        listfromLocal.forEach(el=>{
-            if(el.addedValue !== 0){
-                cart.push(el)
-            }
-        })
-        data.itemsList = cart
-
-        socket.emit('placed', {
-            data : {
-            items : data
-            }
-        })
-        socket.off("orderPlacedResponse");
-        socket.on("orderPlacedResponse", (data)=>{
-            console.log(data)
-            let listfromLocal = JSON.parse(localStorage.getItem('prepcart'))
-            listfromLocal.forEach(el=>{
-                el.addedValue = 0
-            })
-            localStorage.setItem('prepcart', JSON.stringify(listfromLocal))
-            
-            // if(localStorage.getItem('orderPlaced')){
-            //     const placed_orders = JSON.parse(localStorage.getItem('orderPlaced'))
-            //     placed_orders.push(el.data.data.orders)
-            //     localStorage.setItem('orderPlaced', JSON.stringify(placed_orders))
-            // }else{
-            //     localStorage.setItem('orderPlaced', JSON.stringify([el.data.data.orderPlaced]))
-            // }
-
-            localStorage.setItem('orderPlaced', true)
-
-            localStorage.setItem('AllOrders', JSON.stringify(data))            
-            dispatch({type : 'OrderItemWithCOD', payload : true})
-            // dispatch({type : 'orderPlacingFinish'})
-            dispatch({type : 'cartItems', payload : {arr:[], grossPrice:0,cartLength : 0, delivery: data.delivery_charges, totalBill: data.delivery_charges}})
-        
-        })
-        
-
-        // axios({
-        //     method : 'POST',
-        //     url : 'https://wheelbackend.onrender.com/api/v1/user/cod-payment',
-        //     data : {
-        //         items : data
+        // let listfromLocal = data.itemsList
+        // let cart = []
+        // listfromLocal.forEach(el=>{
+        //     if(el.addedValue !== 0){
+        //         cart.push(el)
         //     }
-        // }).then(el=>{
+        // })
+        // data.itemsList = cart
+
+        // socket.emit('placed', {
+        //     data : {
+        //     items : data
+        //     }
+        // })
+        // socket.off("orderPlacedResponse");
+        // socket.on("orderPlacedResponse", (data)=>{
+        //     console.log(data)
         //     let listfromLocal = JSON.parse(localStorage.getItem('prepcart'))
         //     listfromLocal.forEach(el=>{
         //         el.addedValue = 0
@@ -406,14 +375,45 @@ export function OrderItemWITHCODCreator(data){
 
         //     localStorage.setItem('orderPlaced', true)
 
-        //     localStorage.setItem('AllOrders', JSON.stringify(el.data.data.orders))            
+        //     localStorage.setItem('AllOrders', JSON.stringify(data))            
         //     dispatch({type : 'OrderItemWithCOD', payload : true})
         //     // dispatch({type : 'orderPlacingFinish'})
-        //     dispatch({type : 'cartItems', payload : {arr:[], grossPrice:0,cartLength : 0, delivery: data.items.delivery_charges, totalBill: data.items.delivery_charges}})
+        //     dispatch({type : 'cartItems', payload : {arr:[], grossPrice:0,cartLength : 0, delivery: data.delivery_charges, totalBill: data.delivery_charges}})
         
-        //     // socket connection here
-            
         // })
+        
+
+        axios({
+            method : 'POST',
+            url : 'https://wheelbackend.onrender.com/api/v1/user/cod-payment',
+            data : {
+                items : data
+            }
+        }).then(el=>{
+            let listfromLocal = JSON.parse(localStorage.getItem('prepcart'))
+            listfromLocal.forEach(el=>{
+                el.addedValue = 0
+            })
+            localStorage.setItem('prepcart', JSON.stringify(listfromLocal))
+            
+            // if(localStorage.getItem('orderPlaced')){
+            //     const placed_orders = JSON.parse(localStorage.getItem('orderPlaced'))
+            //     placed_orders.push(el.data.data.orders)
+            //     localStorage.setItem('orderPlaced', JSON.stringify(placed_orders))
+            // }else{
+            //     localStorage.setItem('orderPlaced', JSON.stringify([el.data.data.orderPlaced]))
+            // }
+
+            localStorage.setItem('orderPlaced', true)
+
+            localStorage.setItem('AllOrders', JSON.stringify(el.data.data.orders))            
+            dispatch({type : 'OrderItemWithCOD', payload : true})
+            // dispatch({type : 'orderPlacingFinish'})
+            dispatch({type : 'cartItems', payload : {arr:[], grossPrice:0,cartLength : 0, delivery: data.items.delivery_charges, totalBill: data.items.delivery_charges}})
+        
+            // socket connection here
+            
+        })
 
     }
 }
